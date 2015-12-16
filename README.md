@@ -56,7 +56,7 @@ Alternatively, you can download the boxes manually from either Atlas or Akamai:
 
 Or with ``wget``, for example:
 
-    wget --continue https://vagrantcloud.com/modernIE/boxes/vista-ie7/versions/0.0.1/providers/virtualbox.box
+    wget --continue -O virtualbox.box https://vagrantcloud.com/modernIE/boxes/vista-ie7/versions/0.0.1/providers/virtualbox.box
     vagrant box add modernIE/vista-ie7 virtualbox.box
 
 ## Links
