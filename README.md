@@ -56,8 +56,19 @@ Alternatively, you can download the boxes manually from either Atlas or Akamai:
 
 Or with ``wget``, for example:
 
-    wget --continue -O virtualbox.box https://vagrantcloud.com/modernIE/boxes/vista-ie7/versions/0.0.1/providers/virtualbox.box
-    vagrant box add modernIE/vista-ie7 virtualbox.box
+    wget -c -O vista-ie7.box https://vagrantcloud.com/modernIE/boxes/vista-ie7/versions/0.0.1/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/vista-ie7 vista-ie7.box
+    wget -c -O w7-ie8.box https://atlas.hashicorp.com/modernIE/boxes/w7-ie8/versions/0.0.2/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/w7-ie8 w7-ie8.box
+    wget -c -O w7-ie9.box https://atlas.hashicorp.com/modernIE/boxes/w7-ie9/versions/0.0.2/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/w7-ie9 w7-ie9.box
+    wget -c -O w8-ie10.box https://atlas.hashicorp.com/modernIE/boxes/w8-ie10/versions/0.0.2/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/w8-ie10 w8-ie10.box
+    wget -c -O w8.1-ie11 https://atlas.hashicorp.com/modernIE/boxes/w8.1-ie11/versions/0.0.2/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/w8.1-ie11 w8.1-ie11.box
+    wget -c -O w10-edge.box  https://atlas.hashicorp.com/modernIE/boxes/w10-edge/versions/0.0.3/providers/virtualbox.box \
+        && vagrant box add --clean modernIE/w10-edge w10-edge.box
+    vagrant box list
 
 ## Links
 
