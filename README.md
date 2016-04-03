@@ -15,14 +15,14 @@ Install dependencies
 
 Install Vagrant 1.7.4
 
-	wget https://releases.hashicorp.com/vagrant/1.7.4/vagrant_1.7.4_i686.deb
-	sudo dpkg -i vagrant_1.7.4_x86_64.deb
-	sudo apt-get install vagrant-lxc
+	wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
+	sudo dpkg -i vagrant_1.8.1_x86_64.deb
+	sudo apt-get install virtualbox
 
 Start virtual machine
 
     cd vista-ie7
-	vagrant up --provider virtualbox
+	vagrant up
 
 (Optional) Connect with [winrm](https://docs.vagrantup.com/v2/vagrantfile/winrm_settings.html) (only works on some
 boxes)
