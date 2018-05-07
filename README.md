@@ -1,78 +1,74 @@
-# Vagrant configurations for Modern.ie
+# Vagrant Internet Explorer (and Edge) boxes
 
-# Introduction
- 
-This repository contains configurations for [Modern.ie](http://modern.ie) vagrant 
-[virtual machines](https://dev.windows.com/en-us/microsoft-edge/tools/vms/linux/). These configurations have been
-tested on Ubuntu Linux 15.04.
+A collection of Vagrant configurations which can be used to run various
+versions of Internet Explorer on a few different versions of Microsoft
+Windows.
 
-## Getting started
+## Getting Started
 
-Install dependencies
+Install dependencies.
 
-	sudo apt-get install bsdtar redir ruby-childprocess ruby-domain-name ruby-erubis ruby-ffi ruby-http-cookie ruby-dev ruby-i18n ruby-listen ruby-log4r ruby-mime-types ruby-net-scp ruby-net-sftp ruby-net-ssh ruby-rb-inotify ruby-rest-client ruby-sqlite3 ruby-unf ruby-unf-ext
-	sudo gem install winrm
+```bash
+sudo apt-get install ruby vagrant virtualbox
+sudo gem install winrm
+```
 
-Install Vagrant 1.7.4
+Start a Vagrant box for the version of Internet Explorer (or Edge) of your choice.
 
-	wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
-	sudo dpkg -i vagrant_1.8.1_x86_64.deb
-	sudo apt-get install virtualbox
+```bash
+cd ie11
+vagrant up
+```
 
-Start virtual machine
+Optionally, connect to the Vagrant box via
+[winrm](https://docs.vagrantup.com/v2/vagrantfile/winrm_settings.html)
 
-    cd vista-ie7
-	vagrant up
+Username: Username
+Password: Password
 
-(Optional) Connect with [winrm](https://docs.vagrantup.com/v2/vagrantfile/winrm_settings.html) (only works on some
-boxes)
-
-	vagrant rdp
-	
 ## Troubleshooting
 
-By default the vagrant boxes are downloaded from [Atlas](https://atlas.hashicorp.com/modernIE/). These downloads cannot
-be resumed when running ``vagrant up``, so if one fails you can
-[remove the partially downloaded files](http://branetheory.org/2014/12/06/2135/) and try again:
+If you encounter an error such as:
 
-    rm ~/.vagrant.d/tmp/*
+> The box failed to unpackage properly. Please verify that the box
+file you're trying to add is not corrupted and that enough disk space
+is available and then try again.
+The output from attempting to unpackage (if any):
+> 
+> bsdtar: Invalid central directory signature
+bsdtar: Error exit delayed from previous errors.
 
-Alternatively, you can download the boxes manually from either Atlas or Akamai:
+Then you can try the following workaround:
 
-    # Atlas
-    boxes="vista-ie7 w7-ie8 w7-ie9 w8-ie10 w8.1-ie11 w10-edge"
-    for box in $boxes; do
-        vagrant box add --clean modernIE/$box https://atlas.hashicorp.com/modernIE/boxes/$box
-    done
+```bash
+box=ie11
+url='http://aka.ms/ie11.win81.vagrant'
 
-    # Akamai
-    # n.b. The Akamai-hosted vagrant boxes may be out of date and there is no w10-edge box.
-    # The box names are also different from those in Atlas, so if you use these you should
-    # either rename the boxes or update the Vagrantfiles accordingly.
-    boxes="vista-ie7 win7-ie8 win7-ie9 win8-ie10 win81-ie11"
-    for box in $boxes; do
-        vagrant box add --clean modernIE/$box http://aka.ms/vagrant-$box
-    done
+cd ${box}
+wget ${url} --output-file=${box}.zip
+unzip ${box}.zip
+rm ${box}.zip
+mv *.box ${box}.box
 
-Or with ``wget``, for example:
+vagrant up # Will select the local ${box}.box file instead of attempting to download it.
+```
 
-    install_vagrant_box() {
-        local name=$1
-        local version=$2
-        wget -c -O ${name}.box https://vagrantcloud.com/modernIE/boxes/${name}/versions/${version}/providers/virtualbox.box \
-            && vagrant box add --clean modernIE/${name} ${name}.box
-    }
-    install_vagrant_box "vista-ie7" "0.0.1"
-    install_vagrant_box "w7-ie8" "0.0.2"
-    install_vagrant_box "w7-ie9" "0.0.2"
-    install_vagrant_box "w8-ie10" "0.0.2"
-    install_vagrant_box "w8.1-ie11" "0.0.2"
-    install_vagrant_box "w10-edge" "0.0.3"
+## Resources
 
-## Links
+- [modernIE (Deprecated)](https://app.vagrantup.com/modernIE)
+- [Official Microsoft Edge on Windows 10 Vagrant box](https://app.vagrantup.com/Microsoft/boxes/EdgeOnWindows10)
+- [Vagrantbox.es](http://www.vagrantbox.es/)
+- [Vagrantfile gist](https://gist.github.com/anthonysterling/7cb85670b36821122a4a)
 
-[Example Vagrantfile](https://gist.github.com/andreptb/57e388df5e881937e62a)
+List of Vagrant box URLs:
 
-[Vagrant boxes hosted by Atlas](https://atlas.hashicorp.com/modernIE/)
-
-[Vagrant boxes hosted by Akamai](https://www.bram.us/2014/09/24/modern-ie-vagrant-boxes/)
+- http://aka.ms/ie6.xp.vagrant
+- http://aka.ms/ie8.xp.vagrant
+- http://aka.ms/ie7.vista.vagrant
+- http://aka.ms/ie8.win7.vagrant
+- http://aka.ms/ie9.win7.vagrant
+- http://aka.ms/ie10.win7.vagrant
+- http://aka.ms/ie11.win7.vagrant
+- http://aka.ms/ie10.win8.vagrant
+- http://aka.ms/ie11.win81.vagrant
+- http://aka.ms/msedge.win10.vagrant

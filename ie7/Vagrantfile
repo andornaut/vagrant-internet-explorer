@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+boxes = {
+  "ie6"  => "http://aka.ms/vagrant-xp-ie6",
+  "ie7"  => "http://aka.ms/ie7.vista.vagrant",
+  "ie8"  => "http://aka.ms/ie8.win7.vagrant",
+  "ie9"  => "http://aka.ms/ie9.win7.vagrant",
+  "ie10" => "http://aka.ms/ie10.win8.vagrant",
+  "ie11" => "http://aka.ms/ie11.win81.vagrant",
+  "msedge" => "http://aka.ms/msedge.win10.vagrant",
+}
+box = File.basename(Dir.getwd)
+remote_url = boxes[box]
+local_path = box + '.box'
+box_url = File.file?(local_path) ? local_path : remote_url
+
+Vagrant.configure("2") do |config|
+  config.vm.box = box
+  config.vm.box_url = box_url
+  config.vm.guest = :windows
+  config.vm.boot_timeout = 1
+  config.vm.communicator = "winrm"
+  config.winrm.username = "Username"
+  config.winrm.password = "Password"
+  config.vm.provider "virtualbox" do |vm|
+    vm.gui = true
+  end
+end
