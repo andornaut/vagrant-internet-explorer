@@ -18,6 +18,7 @@ box_url = File.file?(local_path) ? local_path : remote_url
 Vagrant.configure("2") do |config|
   config.vm.box = box
   config.vm.box_url = box_url
+  config.vm.boot_timeout = 1
   config.vm.guest = :windows
   config.vm.hostname = "#{`hostname`[0..-2]}".sub(/\..*$/,'') + box
   config.vm.provider "virtualbox" do |vm|
