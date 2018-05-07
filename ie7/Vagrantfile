@@ -19,11 +19,15 @@ Vagrant.configure("2") do |config|
   config.vm.box = box
   config.vm.box_url = box_url
   config.vm.guest = :windows
-  config.vm.boot_timeout = 1
+  config.vm.hostname = "#{`hostname`[0..-2]}".sub(/\..*$/,'') + box
   config.vm.communicator = "winrm"
   config.winrm.username = "IEUser"
   config.winrm.password = "Passw0rd!"
   config.vm.provider "virtualbox" do |vm|
     vm.gui = true
+    vb.customize ["modifyvm", :id, "--vram", "256"]
+    vm.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    vm.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vm.customize ["guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000]
   end
 end
