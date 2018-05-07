@@ -47,7 +47,7 @@ url='http://aka.ms/ie11.win81.vagrant'
 
 ```bash
 cd ${box}
-wget --output-file=${box}.zip ${url}
+wget -O ${box}.zip ${url}
 unzip ${box}.zip
 rm ${box}.zip
 mv *.box ${box}.box
