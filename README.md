@@ -23,8 +23,8 @@ vagrant up
 Optionally, connect to the Vagrant box via
 [winrm](https://docs.vagrantup.com/v2/vagrantfile/winrm_settings.html)
 
-Username: Username
-Password: Password
+Username: IEUser
+Password: Passw0rd!
 
 ## Troubleshooting
 
@@ -36,21 +36,39 @@ is available and then try again.
 The output from attempting to unpackage (if any):
 > 
 > bsdtar: Invalid central directory signature
-bsdtar: Error exit delayed from previous errors.
+> bsdtar: Error exit delayed from previous errors.
 
 Then you can try the following workaround:
+
+1. Set a couple of variables. 
 
 ```bash
 box=ie11
 url='http://aka.ms/ie11.win81.vagrant'
+```
 
+- The `box` variable should match one of the directories in the root of this project.
+- The `url` variable should be chosen from among this list:
+  - http://aka.ms/ie6.xp.vagrant
+  - http://aka.ms/ie8.xp.vagrant
+  - http://aka.ms/ie7.vista.vagrant
+  - http://aka.ms/ie8.win7.vagrant
+  - http://aka.ms/ie9.win7.vagrant
+  - http://aka.ms/ie10.win7.vagrant
+  - http://aka.ms/ie11.win7.vagrant
+  - http://aka.ms/ie10.win8.vagrant
+  - http://aka.ms/ie11.win81.vagrant
+  - http://aka.ms/msedge.win10.vagrant
+
+2. Run the following script:
+
+```bash
 cd ${box}
-wget ${url} --output-file=${box}.zip
+wget --output-file=${box}.zip ${url}
 unzip ${box}.zip
 rm ${box}.zip
 mv *.box ${box}.box
-
-vagrant up # Will select the local ${box}.box file instead of attempting to download it.
+vagrant up # This will install the local ${box}.box file instead of attempting to download it.
 ```
 
 ## Resources
@@ -59,16 +77,3 @@ vagrant up # Will select the local ${box}.box file instead of attempting to down
 - [Official Microsoft Edge on Windows 10 Vagrant box](https://app.vagrantup.com/Microsoft/boxes/EdgeOnWindows10)
 - [Vagrantbox.es](http://www.vagrantbox.es/)
 - [Vagrantfile gist](https://gist.github.com/anthonysterling/7cb85670b36821122a4a)
-
-List of Vagrant box URLs:
-
-- http://aka.ms/ie6.xp.vagrant
-- http://aka.ms/ie8.xp.vagrant
-- http://aka.ms/ie7.vista.vagrant
-- http://aka.ms/ie8.win7.vagrant
-- http://aka.ms/ie9.win7.vagrant
-- http://aka.ms/ie10.win7.vagrant
-- http://aka.ms/ie11.win7.vagrant
-- http://aka.ms/ie10.win8.vagrant
-- http://aka.ms/ie11.win81.vagrant
-- http://aka.ms/msedge.win10.vagrant
