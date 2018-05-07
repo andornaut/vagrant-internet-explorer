@@ -20,9 +20,6 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = box_url
   config.vm.guest = :windows
   config.vm.hostname = "#{`hostname`[0..-2]}".sub(/\..*$/,'') + box
-  config.vm.communicator = "winrm"
-  config.winrm.username = "IEUser"
-  config.winrm.password = "Passw0rd!"
   config.vm.provider "virtualbox" do |vm|
     vm.gui = true
     vm.customize ["modifyvm", :id, "--vram", "256"]
