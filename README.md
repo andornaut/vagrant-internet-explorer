@@ -1,30 +1,13 @@
 # Vagrant Internet Explorer (and Edge) boxes
 
-A collection of Vagrant configurations which can be used to run various
-versions of Internet Explorer on a few different versions of Microsoft
-Windows.
+A collection of Vagrant configurations that can be used to run various
+versions of Internet Explorer (or Microsoft Edge) on Microsoft Windows.
 
 ## Getting Started
 
-Install dependencies.
-
-```bash
-sudo apt-get install ruby vagrant virtualbox
-sudo gem install winrm
-```
-
-Start a Vagrant box for the version of Internet Explorer (or Edge) of your choice.
-
-```bash
-cd ie11
-vagrant up
-```
-
-Optionally, connect to the Vagrant box via
-[winrm](https://docs.vagrantup.com/v2/vagrantfile/winrm_settings.html)
-
-Username: IEUser
-Password: Passw0rd!
+1. Install the dependencies: `sudo apt-get install vagrant virtualbox`
+1. Select a version of Internet Explorer or Microsoft Edge: `cd ie11`
+1. Start the corresponding Vagrant box: `vagrant up`
 
 ## Troubleshooting
 
