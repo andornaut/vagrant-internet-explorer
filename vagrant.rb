@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 boxes = {
-  "ie6"  => "http://aka.ms/vagrant-xp-ie6",
+  "ie6"  => "http://aka.ms/ie6.xp.vagrant",
   "ie7"  => "http://aka.ms/ie7.vista.vagrant",
   "ie8"  => "http://aka.ms/ie8.win7.vagrant",
   "ie9"  => "http://aka.ms/ie9.win7.vagrant",
@@ -15,7 +15,7 @@ boxes = {
 // to `box` values such as "ie11"
 box = File.basename(Dir.getwd)
 remote_url = boxes[box]
-local_path = box + '.box'
+local_path = box + ".box"
 // Install a local box file if one exists eg. `ie11.box`, otherwise download the box file from `remote _url`.
 box_url = File.file?(local_path) ? local_path : remote_url
 
