@@ -9,6 +9,12 @@ versions of Internet Explorer (or Microsoft Edge) on Microsoft Windows.
 1. Select a version of Internet Explorer or Microsoft Edge: `cd ie11`
 1. Start the corresponding Vagrant box: `vagrant up`
 
+## User Accounts
+
+Username | IEUser
+--- | ---
+IEUser | Passw0rd!  
+
 ## Troubleshooting
 
 If you encounter an error such as:
