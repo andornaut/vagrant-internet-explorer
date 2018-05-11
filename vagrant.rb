@@ -11,12 +11,13 @@ boxes = {
   "msedge" => "http://aka.ms/msedge.win10.vagrant",
 }
 
-// This script is required by `Vagrantfile` files in subdirectories of this one - such as ``./ie11` - which correspond
-// to `box` values such as "ie11"
+# This script is required by `Vagrantfile` files in subdirectories of this one - such as ``./ie11` - which correspond
+# to `box` values such as "ie11"
 box = File.basename(Dir.getwd)
 remote_url = boxes[box]
 local_path = box + ".box"
-// Install a local box file if one exists eg. `ie11.box`, otherwise download the box file from `remote _url`.
+
+# Install a local box file if one exists eg. `ie11.box`, otherwise download the box file from `remote _url`.
 box_url = File.file?(local_path) ? local_path : remote_url
 
 Vagrant.configure("2") do |config|
